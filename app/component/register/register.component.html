@@ -1,0 +1,23 @@
+<router-outlet></router-outlet>
+<div class="bg-dark" style="height:100%;">
+<div class="container pt-5 justify-content-center">
+    <div class="row">
+        <div class="col-6"><img src='../../../assets/images/why-choose-us.png' class="img-fluid"></div>
+        <div class="col"></div>
+        <div class="col-4 shadow mt-5 bg-info p-5" style="border-radius:20px; border:2px solide black;">
+            <h1>REGISTER</h1><br><br>
+            <mat-form-field class="example-full-width w-100">
+                <mat-label>Email</mat-label>
+                  <input matInput type="text" [(ngModel)]="email">
+              </mat-form-field>
+        <br><br>
+        <mat-form-field class="example-full-width w-100">
+            <mat-label>Password</mat-label>
+              <input matInput type="text" [(ngModel)]="password">
+          </mat-form-field><br><br>
+        <button class="btn btn-primary pe-3 ps-3" (click)="register()">Sign Up</button><br><br>
+        <p>Already User? <a role="button" routerLink="/login">login</a></p>
+        </div>
+    </div>
+</div>
+</div>

@@ -1,0 +1,202 @@
+<!-- <navbar> -->
+  <div class="container-fluid-well"><nav class="navbar navbar-light bg-primary justify-content-center mb-5 shadow">
+  <h1 class="navbar-brand mb-0 h1" style="font-family:Gill Sans,sans-serif; font-size:30px; color:white;text-shadow:1px 1px 1px;"><img src="../../../assets/images/clipart1759479.png" style="width:25px; height:35px;"> Student Management</h1>
+  <mat-icon aria-hidden="false" aria-label="Example home icon" role="button" style="color:white;float: right; margin-left:70%; text-shadow:1px 1px 1px;"(click)="register()">logout</mat-icon>
+</nav></div>
+
+<!-- <content> -->
+<div class="container-fluid">
+  <div class="row">
+      <div class="col-3">
+      <h1 class="text-center" style="text-shadow: 1px 1px 1px;">ADD STUDENT</h1><br>
+      <form class="example-form">
+        <mat-form-field class="example-full-width w-100" >
+          <mat-label>Name</mat-label>
+          <input matInput type="text" id="Name" name="Name" [(ngModel)]="Name" >
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width w-100">
+          <mat-label>Age</mat-label>
+          <input matInput type="number" id="Age" name="Age" [(ngModel)]="Age" >
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width w-100" >
+          <mat-label>Class</mat-label>
+          <input matInput type="number" id="Class" name="Class" [(ngModel)]="Class" >
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width w-100" >
+          <mat-label>Email id</mat-label>
+          <input matInput type="email" id="Email" name="Email" [(ngModel)]="Email" >
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width w-100" >
+          <mat-label>Phone</mat-label>
+          <input matInput type="cell" id="Phone" name="Phone" [(ngModel)]="Phone" >
+        </mat-form-field>
+      </form>
+      <button class="btn btn-primary pe-3 ps-3 shadow" (click)="addStudent()" >ADD</button><br><br>
+      </div>
+
+      <!-- <table> -->
+      <div class="col-9">
+          <h1 class="text-center"  style="text-shadow: 1px 1px 1px;">STUDENTS DETAILS</h1><br>
+          <table class="table table-stripped table-hover table-sm text-center shadow">
+              <thead>
+                <th>S.No</th>
+                <th>NAME</th>
+                <th>AGE</th>
+                <th>CLASS</th>
+                <th>EMAIL</th>
+                <th>PHONE</th>
+                <th>ACTION</th>
+              </thead>
+              <tbody>
+                <tr *ngFor="let Students of studentsList;index as i">
+                  <th scope="row">{{ i+1 }}</th>                 
+                  <td>{{Students.Name}}</td>
+                  <td>{{Students.Age}}</td>
+                  <td>{{Students.Class}}</td>
+                  <td>{{Students.Email}}</td>
+                  <td>{{Students.Phone}}</td>
+                  <td>
+                    <mat-icon aria-hidden="false" aria-label="Example home icon" role="button" class="me-4" title="View" data-bs-toggle="modal" data-bs-target="#v" (click)="onSelect(Students)">visibility</mat-icon>
+                    <mat-icon aria-hidden="false" aria-label="Example home icon" role="button" class="me-4" title="Edit" data-bs-toggle="modal" data-bs-target="#staticBackdrop" (click)="onSelect(Students)">edit</mat-icon>
+                    <mat-icon aria-hidden="false" aria-label="Example home icon" role="button" title="Delete" (click)="deleteStudent(Students)">delete</mat-icon>
+                  </td>
+                </tr>
+              </tbody>
+          </table>
+       </div>
+     </div>
+  </div>
+  
+
+<!-- Modal -->
+<!-- <div class="modal fade" id="editStudent" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" > -->
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="exampleModalLabel">Edit Student Details</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="reset()"></button>
+      </div>
+      <div class="modal-body">
+        <form class="example" ng-controller="formcontrol" #emp="ngForm" [formGroup]="stu" (ngSubmit)="onSubmit(stu.value)" novalidate>
+
+          <mat-form-field class="example-full-width w-100">
+            <mat-label>Name</mat-label>
+              <input matInput type="text" name="Name" formControlName="Name" [(ngModel)]="Name">
+          </mat-form-field>
+  
+          <mat-form-field class="example-full-width w-100">
+            <mat-label>Age</mat-label>
+            <input matInput type="number" name="Age" formControlName="Age" [(ngModel)]="Age">
+          </mat-form-field>
+  
+          <mat-form-field class="example-full-width w-100" >
+            <mat-label>Class</mat-label>
+            <input matInput type="number"  name="Class" formControlName="Class" [(ngModel)]="Class">
+          </mat-form-field>
+  
+          <mat-form-field class="example-full-width w-100" >
+            <mat-label>Email id</mat-label>
+            <input matInput type="email"  name="Email" formControlName="Email"[(ngModel)]="Email">
+          </mat-form-field>
+  
+          <mat-form-field class="example-full-width w-100">
+            <mat-label>Phone</mat-label>
+            <input matInput type="cell"  name="Phone" formControlName="Phone" [(ngModel)]="Phone">
+          </mat-form-field><br><br>
+          <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Update</button>&nbsp;&nbsp;&nbsp;&nbsp;
+          <button type="button" class="btn btn-secondary" (click)="reset()" data-bs-dismiss="modal">Close</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<div class="modal fade" id="v" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="exampleModalLabel">Student Details</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body"[formGroup]="stu" style="margin-left:33%;">
+        <p><b>Name : </b><input type="cell" id="Name" name="Name" formControlName="Name" style="border-style: none;"></p>
+        <p><b>Age : </b><input type="cell" id="Age" name="Age" formControlName="Age" style="border-style: none;"></p>
+        <p><b>Class : </b><input type="cell" id="Class" name="Class" formControlName="Class" style="border-style: none;"></p>
+        <p><b>Email : </b><input type="cell" id="Email" name="Email" formControlName="Email" style="border-style: none;"></p>
+        <p><b>Phone : </b><input type="cell" id="Phone" name="Phone" formControlName="Phone" style="border-style: none;"></p>
+      </div>
+      <div class="modal-footer justify-content-center">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <div class="'row">
+      <div class="col-4"><h1>gfffh</h1></div>
+      <div class="col-4"><img src="" alt=""></div>
+      <div class="col-4"><table class="table table-stripped table-hover table-sm text-center shadow">
+          <thead>
+            <th>S.No</th>
+            <th>Name</th>
+            <th>Action</th>
+          </thead>
+          <tbody>
+            <tr>
+              <td>f</td>
+              <td>f</td>
+              <td>
+                <mat-icon aria-hidden="false" aria-label="Example home icon" role="button" class="me-4" title="Add">add</mat-icon>
+                <mat-icon aria-hidden="false" aria-label="Example home icon" role="button" class="me-4" title="Edit">edit</mat-icon>
+                <mat-icon aria-hidden="false" aria-label="Example home icon" role="button" class="me-4" title="Update">update</mat-icon>
+                <mat-icon aria-hidden="false" aria-label="Example home icon" role="button" title="Delete">delete</mat-icon>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <mat-paginator [length]="100"
+                [pageSize]="5"
+                [pageSizeOptions]="[5, 10, 25, 100]"
+                aria-label="Select page of Appcomponent">
+      </mat-paginator>
+      </div>
+</div> -->
+
+
+
+
+  <!-- <input type="text" class="form-control w-100" required placeholder="Name" id="Name" name="Name" [(ngModel)]="Name">
+      <br>
+      <input type="number" class="form-control w-100" required  placeholder="Age" id="Age" name="Age" [(ngModel)]="Age">
+      <br>
+      <input type="number" class="form-control w-100" required  placeholder="Class" id="Class" name="Class" [(ngModel)]="Class">
+      <br>
+      <input type="email" class="form-control w-100" required  placeholder="Email"  id="Email" name="Email" [(ngModel)]="Email">
+      <br>
+      <input type="text" class="form-control w-100" required  placeholder="Phone"  id="Phone" name="Phone" [(ngModel)]="Phone">
+      <br> -->
+      <!-- <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta, distinctio!
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Understood</button>
+            </div>
+        </div>
+        </div>
+    </div> -->
